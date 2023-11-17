@@ -1,0 +1,24 @@
+services:
+  app:
+    image: node:16-alpine
+    user: "node"
+    working_dir: /app
+    volumes:
+      - type: bind
+        source: ./
+        target: /app
+    ports:
+      - 127.0.0.1:${DOCKER_APP_PORT}:3000
+    stdin_open: true
+    tty: true
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - myapp:/var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:${DOCKER_DB_PORT}:5432
+volumes:
+  myapp:
