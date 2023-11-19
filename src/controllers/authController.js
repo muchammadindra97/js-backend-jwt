@@ -19,6 +19,8 @@ router.post('/sign-up', async (req, res, next) => {
           status: 'fail',
           message: 'Email already registered'
         })
+
+      return
     }
 
     const selectedRoles = []
@@ -34,6 +36,8 @@ router.post('/sign-up', async (req, res, next) => {
               status: 'fail',
               message: `Role not exists: ${roleName}`
             })
+
+          return
         }
 
         selectedRoles.push(result)
@@ -85,6 +89,8 @@ router.post('/sign-in', async (req, res, next) => {
           status: 'fail',
           message: 'Invalid email or password'
         })
+
+      return
     }
 
     const isPasswordValid = bcrypt.compareSync(password, user.password)
@@ -96,6 +102,8 @@ router.post('/sign-in', async (req, res, next) => {
           status: 'fail',
           message: 'Invalid email or password'
         })
+
+      return
     }
 
     const token = jwt.sign(
