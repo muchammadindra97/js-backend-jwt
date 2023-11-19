@@ -114,8 +114,7 @@ router.post('/sign-in', async (req, res, next) => {
       process.env.APP_SECRET,
       {
         algorithm: 'HS256',
-        allowInsecureKeySizes: true,
-        expiresIn: process.env.APP_JWT_EXPIRY
+        expiresIn: parseInt(process.env.APP_JWT_EXPIRY)
       }
     )
 
